@@ -1,1 +1,2 @@
-# css-format
+# CSS formatting tool
+The CSS Formatter Tool is a lightweight, web-based utility designed to streamline and optimize CSS-style code. It allows users to paste unformatted CSS, automatically formats the code by removing unnecessary whitespace and aligning rules for better readability, and outputs the cleaned result. The tool supports one-click formatting, clearing input, and copying the final CSS to the clipboard. It’s especially useful for developers looking to tidy up CSS snippets quickly without relying on complex editors. click here to use.
