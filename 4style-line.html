@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSS简洁排版工具</title>
+  <style>
+    body{font-family:sans-serif;padding:20px;background:#f0f2f5;display:flex;justify-content:flex-start;align-items:center;min-height:100vh;flex-direction:column;}
+    h1{font-size:1.8rem;margin-bottom:10px}
+    textarea{width:50%;height:100px;margin-top:10px;border-radius:8px;padding:10px;font-family:monospace;font-size:14px}
+    button{width: 25%;display: block;margin-top:15px;padding:10px 20px;border:none;background:#6a11cb;color:white;border-radius:6px;cursor:pointer}
+    button:hover{background:#2575fc}
+    .button-group{display:flex;gap:10px;margin-top:15px;width: 50%;}
+    .button-group button{flex:2;/* 平均分配宽度 */}
+    pre{width:50%;height:100px;background:#333;color:#eee;padding:10px;border-radius:8px;white-space:pre-wrap;word-break:break-all;margin-top:20px;resize: both;overflow: auto;}
+  </style>
+</head>
+
+<body>
+  <h1>CSS简洁排版工具</h1>
+  <textarea id="inputCSS" placeholder="粘贴CSS代码到这里"></textarea>
+  <div class="button-group">
+    <button onclick="formatCSS()">格式化</button> 
+    <button onclick="clearCSS()">清除</button>
+  </div>
+  <pre id="outputCSS"></pre>
+  <button onclick="copyCSS()"style="margin-left: -310px;">复制</button>
+
+  <script>
+    function formatCSS() {
+      let css = document.getElementById('inputCSS').value
+      css = css.replace(/\s*{\s*/g, '{').replace(/\s*}\s*/g, '}').replace(/\s*;\s*/g, ';').replace(/\s*:\s*/g, ':').replace(/}\s*/g, '}\n')
+      document.getElementById('outputCSS').innerText = css
+    }
+    function formatCSS() {
+        let css = document.getElementById('inputCSS').value
+        css = css.replace(/\s*{\s*/g, '{')
+          .replace(/\s*}\s*/g, '}')
+          .replace(/\s*;\s*/g, ';')
+          .replace(/\s*:\s*/g, ':')
+          .replace(/}\s*/g, '}\n')
+
+        // 移除每行开头的空白，实现左对齐
+        css = css.split('\n').map(line => line.trimStart()).join('\n')
+
+        document.getElementById('outputCSS').innerText = css
+    }
+    function clearCSS() {
+        document.getElementById('inputCSS').value = ''
+        document.getElementById('outputCSS').innerText = ''
+    }
+    function copyCSS() {
+        let text = document.getElementById('outputCSS').innerText
+        navigator.clipboard.writeText(text).then(() => {
+          alert("已复制到剪贴板！")
+        }).catch(err => {
+          alert("复制失败：" + err)
+        })
+    }
+  </script>
+</body>
+
+</html>
