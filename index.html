@@ -50,6 +50,31 @@
         document.getElementById('inputCSS').value = ''
         document.getElementById('outputCSS').innerText = ''
     }
+    function formatCSS() {
+        let css = document.getElementById('inputCSS').value
+        css = css.replace(/\s*{\s*/g, '{')
+          .replace(/\s*}\s*/g, '}')
+          .replace(/\s*;\s*/g, ';')
+          .replace(/\s*:\s*/g, ':')
+          .replace(/}\s*/g, '}\n')
+
+        // 移除每行开头的空白，实现左对齐
+        css = css.split('\n').map(line => line.trimStart()).join('\n')
+
+        // 自动进行中间代码缩进
+        let lines = css.split('\n')
+        if (lines.length > 2) {
+          css = lines.map((line, index) => {
+            if (index === 0 || index === lines.length - 1) {
+              return line
+            } else {
+              return '  ' + line // 两个空格缩进
+            }
+          }).join('\n')
+        }
+
+        document.getElementById('outputCSS').innerText = css
+    }
     function copyCSS() {
         let text = document.getElementById('outputCSS').innerText
         navigator.clipboard.writeText(text).then(() => {
